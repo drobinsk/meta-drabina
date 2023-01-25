@@ -1,3 +1,8 @@
+From 210cc842dbfad2c4004bdd6f79a4a40fdc7df55f Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 25 Jan 2023 20:11:26 +0100
+Subject: [PATCH] 
+ https://github.com/v8/v8/commit/878ccb33bd3cf0e6dc018ff8d15843f585ac07be
 
 https://github.com/v8/v8/commit/878ccb33bd3cf0e6dc018ff8d15843f585ac07be
 
@@ -5,9 +10,16 @@ did some automated cleanups but it missed big-endian code.
 
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+---
+ deps/v8/src/runtime/runtime-utils.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/deps/v8/src/runtime/runtime-utils.h b/deps/v8/src/runtime/runtime-utils.h
+index 30437b9b..3caf875f 100644
 --- a/deps/v8/src/runtime/runtime-utils.h
 +++ b/deps/v8/src/runtime/runtime-utils.h
-@@ -126,7 +126,7 @@ static inline ObjectPair MakePair(Object
+@@ -39,7 +39,7 @@ static inline ObjectPair MakePair(Object x, Object y) {
  #if defined(V8_TARGET_LITTLE_ENDIAN)
    return x.ptr() | (static_cast<ObjectPair>(y.ptr()) << 32);
  #elif defined(V8_TARGET_BIG_ENDIAN)

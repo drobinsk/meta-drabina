@@ -1,4 +1,4 @@
-From 7d94bfe53beeb2d25eb5f2ff6b1d509df7e6ab80 Mon Sep 17 00:00:00 2001
+From 392b881765a285e8f139e2fc1337e971fb81b8fe Mon Sep 17 00:00:00 2001
 From: Zuzana Svetlikova <zsvetlik@redhat.com>
 Date: Thu, 27 Apr 2017 14:25:42 +0200
 Subject: [PATCH] Disable running gyp on shared deps
@@ -8,10 +8,10 @@ Subject: [PATCH] Disable running gyp on shared deps
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 93d63110..79caaec2 100644
+index 05fdc150..46816fe1 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -138,7 +138,7 @@ with-code-cache test-code-cache:
+@@ -169,7 +169,7 @@ with-code-cache test-code-cache:
  	$(warning '$@' target is a noop)
  
  out/Makefile: config.gypi common.gypi node.gyp \

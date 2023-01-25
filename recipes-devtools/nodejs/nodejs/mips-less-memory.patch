@@ -1,5 +1,9 @@
+From 81f9e475dc80fd4362a130c8de9df798a6280544 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?J=C3=A9r=C3=A9my=20Lal?= <kapouer@melix.org>
+Date: Wed, 25 Jan 2023 20:11:26 +0100
+Subject: [PATCH] nodejs: Import from meta-openembedded
+
 Description: mksnapshot uses too much memory on 32-bit mipsel
-Author: Jérémy Lal <kapouer@melix.org>
 Last-Update: 2020-06-03
 Forwarded: https://bugs.chromium.org/p/v8/issues/detail?id=10586
 
@@ -8,20 +12,16 @@ ensures that qemu-mips can allocate such large ranges
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
---- a/deps/v8/src/common/globals.h
-+++ b/deps/v8/src/common/globals.h
-@@ -224,7 +224,7 @@ constexpr size_t kMinimumCodeRangeSize =
- constexpr size_t kMinExpectedOSPageSize = 64 * KB;  // OS page on PPC Linux
- #elif V8_TARGET_ARCH_MIPS
- constexpr bool kPlatformRequiresCodeRange = false;
--constexpr size_t kMaximalCodeRangeSize = 2048LL * MB;
-+constexpr size_t kMaximalCodeRangeSize = 512 * MB;
- constexpr size_t kMinimumCodeRangeSize = 0 * MB;
- constexpr size_t kMinExpectedOSPageSize = 4 * KB;  // OS page.
- #else
+---
+ deps/v8/src/codegen/mips/constants-mips.h | 2 +-
+ deps/v8/src/common/globals.h              | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/deps/v8/src/codegen/mips/constants-mips.h b/deps/v8/src/codegen/mips/constants-mips.h
+index 5ed338e3..700a4339 100644
 --- a/deps/v8/src/codegen/mips/constants-mips.h
 +++ b/deps/v8/src/codegen/mips/constants-mips.h
-@@ -140,7 +140,7 @@ const uint32_t kLeastSignificantByteInIn
+@@ -140,7 +140,7 @@ const uint32_t kLeastSignificantByteInInt32Offset = 3;
  namespace v8 {
  namespace internal {
  
@@ -30,3 +30,16 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  
  // -----------------------------------------------------------------------------
  // Registers and FPURegisters.
+diff --git a/deps/v8/src/common/globals.h b/deps/v8/src/common/globals.h
+index 1b9f9a94..1117478c 100644
+--- a/deps/v8/src/common/globals.h
++++ b/deps/v8/src/common/globals.h
+@@ -284,7 +284,7 @@ constexpr size_t kMinimumCodeRangeSize = 0 * MB;
+ constexpr size_t kMinExpectedOSPageSize = 64 * KB;  // OS page on PPC Linux
+ #elif V8_TARGET_ARCH_MIPS
+ constexpr bool kPlatformRequiresCodeRange = false;
+-constexpr size_t kMaximalCodeRangeSize = 2048LL * MB;
++constexpr size_t kMaximalCodeRangeSize = 512 * MB;
+ constexpr size_t kMinimumCodeRangeSize = 0 * MB;
+ constexpr size_t kMinExpectedOSPageSize = 4 * KB;  // OS page.
+ #else
